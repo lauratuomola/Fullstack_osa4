@@ -1,1 +1,1 @@
-tehdyt tehtävät : 1
+tehdyt tehtävät : 1, 2
