@@ -5,5 +5,5 @@ content-type: application/json
   "title": "otsikko",
   "author": "määä",
   "url": "www.fi",
-  "likes": "100"
+  "likes": "9"
 }
