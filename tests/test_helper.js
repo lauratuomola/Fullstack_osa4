@@ -53,12 +53,12 @@ const format = (blog) => {
 //   return note._id.toString()
 // }
 
-const blogsInDatabase = async () => {
+const blogsInDb = async () => {
   const blogs = await Blog.find({})
   return blogs.map(format)
 }
 
 
 module.exports = {
-  initialBlogs, format, blogsInDatabase
+  initialBlogs, format, blogsInDb
 }

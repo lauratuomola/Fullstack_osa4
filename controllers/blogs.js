@@ -44,10 +44,7 @@ blogsRouter.post('/', async (request, response) => {
     })
     const savedBlog = await blog.save()
     response.json(formatBlog(savedBlog))
-  }
-
-
- 
+  } 
 
 })
 module.exports = blogsRouter
