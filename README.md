@@ -1,1 +1,1 @@
-tehdyt tehtävät : 1, 2, 3, 4, 5, 8 = yht. 6 tehtävää.
+tehdyt tehtävät : 1, 2, 3, 4, 5, 8, 9 = yht. 7 tehtävää.
