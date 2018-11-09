@@ -103,6 +103,24 @@ test('likes=0 if likes are missing', async () => {
 
 
 })
+test('if title and url are missing, respond with code 400', async () => {
+  const newBlog = {
+    author: "someone",
+    likes: 120
+  }
+  const intialBlogs = await api
+    .get('/api/blogs')
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
+
+  const response = await api
+    .get('/api/blogs')
+
+  expect(response.body.length).toBe(intialBlogs.body.length)
+})
 
 afterAll(() => {
   server.close()
