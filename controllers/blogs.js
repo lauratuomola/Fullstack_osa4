@@ -22,16 +22,29 @@ blogsRouter.post('/', async (request, response) => {
   if (body.title === undefined) {
     return response.status(400).json({ error: 'content missing' })
   }
+  if (body.likes === undefined) {
+    const blog = new Blog({
+      title: body.title,
+      author: body.author,
+      url: body.url,
+      likes: 0
+    })
+    const savedBlog = await blog.save()
+    response.json(formatBlog(savedBlog))
+  } else {
 
-  const blog = new Blog({
-    title: body.title,
-    author: body.author,
-    url: body.url,
-    likes: body.likes
-  })
+    const blog = new Blog({
+      title: body.title,
+      author: body.author,
+      url: body.url,
+      likes: body.likes
+    })
+    const savedBlog = await blog.save()
+    response.json(formatBlog(savedBlog))
+  }
 
-  const savedBlog = await blog.save()
-  response.json(formatBlog(savedBlog))
+
+ 
 
 })
 module.exports = blogsRouter

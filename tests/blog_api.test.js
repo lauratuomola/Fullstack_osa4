@@ -54,10 +54,10 @@ test('blogs are returned as json', async () => {
 }, 30000);
 
 test('all blogs are returned', async () => {
-    const response = await api
-      .get('/api/blogs')
-    expect(response.body.length).toBe(initialBlogs.length)
-  })
+  const response = await api
+    .get('/api/blogs')
+  expect(response.body.length).toBe(initialBlogs.length)
+})
 
 test('a valid blog can be added', async () => {
   const newBlog = {
@@ -80,6 +80,28 @@ test('a valid blog can be added', async () => {
 
   expect(response.body.length).toBe(initialBlogs.length + 1)
   expect(titles).toContain('Wikipedia')
+})
+test('likes=0 if likes are missing', async () => {
+  const newBlog = {
+    title: "Ruokablogi",
+    author: "Kokki",
+    url: "blogspot.ruokablogi.com"
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+
+  const response = await api
+    .get('/api/blogs')
+  const likes = response.body.map(r => r.likes)
+
+  expect(response.body.length).toBe(initialBlogs.length + 2)
+  expect(likes).toContain(0)
+
+
 })
 
 afterAll(() => {
