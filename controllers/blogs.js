@@ -1,18 +1,10 @@
 const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
 
-const formatBlog = (blog) => {
-  return {
-    title: blog.title,
-    author: blog.author,
-    url: blog.url,
-    likes: blog.likes
-  }
-}
 
 blogsRouter.get('/', async (request, response) => {
   const blogs = await Blog.find({})
-  response.json(blogs.map(formatBlog))
+  response.json(blogs.map(Blog.format))
 
 })
 
@@ -33,7 +25,7 @@ blogsRouter.post('/', async (request, response) => {
       likes: 0
     })
     const savedBlog = await blog.save()
-    response.json(formatBlog(savedBlog))
+    response.json(Blog.format(blog))
   } else {
 
     const blog = new Blog({
@@ -43,7 +35,7 @@ blogsRouter.post('/', async (request, response) => {
       likes: body.likes
     })
     const savedBlog = await blog.save()
-    response.json(formatBlog(savedBlog))
+    response.json(Blog.format(blog))
   } 
 
 })
@@ -69,7 +61,7 @@ blogsRouter.put('/:id', async (request, response) => {
   })
 
   const savedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, {new: true})
-  response.json(formatBlog(savedBlog))
+  response.json(Blog.format(blog))
 
 
 })

@@ -5,22 +5,19 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const blogsRouter = require('./controllers/blogs')
+const usersRouter = require('./controllers/users')
 const config = require('./utils/config')
 
 
 
-mongoose
-  .connect(config.mongoUrl)
-  .then(() => {
-    console.log('connected to database', config.mongoUrl)
-  })
-  .catch(err => {
-    console.log(err)
-  })
+mongoose.connect(config.mongoUrl)
+mongoose.Promise = global.Promise
+
 app.use(cors())
 app.use(bodyParser.json())
 app.use(express.static('build'))
 
+app.use('/api/users', usersRouter)
 app.use('/api/blogs', blogsRouter)
 const server = http.createServer(app)
 
