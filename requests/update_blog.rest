@@ -1,8 +1,0 @@
-POST http://localhost:3001/api/blogs/5a422a851b54a676234d17f7
-
-{
-"title": "React", 
-"author": "some",
-"url": "www.fi",
-"likes": 10
-}
